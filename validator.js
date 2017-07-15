@@ -212,8 +212,8 @@ function Validator(errors) {
     }
 
     /**
-     * Mostrar os erros de validação do form ao utilizador
-     * @param {Object} errors - array com os erros: elemento DOM e a mensagem de erro
+     * Creates DOM elements to show validation errors to the user
+     * @param {Object} errors - array with the errors: element that failed validation and error
      */
     var handleValidationErrors = function(errors){
         removeValdiationErrors();
@@ -232,8 +232,7 @@ function Validator(errors) {
     }
 
     /**
-     * Remove tudo o que que está relacionado com erros no preenchimento de formulários.
-     * Isto é, elementos HTML e classes
+     * Removes error DOM elements
      */
     var removeValdiationErrors = function(){
         var elements = $(".error-wrapper");
