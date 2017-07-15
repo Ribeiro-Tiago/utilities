@@ -16,29 +16,27 @@ Currently supports the following:
 ### requires jquery to work
 
 #Instalation
-Simply include the script to your file: <script src="path/to/script"></script>
+Simply include the script to your file: ``<script src="path/to/script"></script>``
 
 #Usage
 Validator recieves a boolean argument (defaults to true) that tells the validator if we want to handle the errors (add DOM elements with error message) or just return the result of the validation.
-
-```sh
-function validateFields(fields){
-  fields is an array of objects with the following composition:
-  {
-    field: input selector,
-    rule: string / array with the validation rules,
-    message: custom message you might wanna send
-  }
-}
-```
-
 ```sh
 var validator = new Validator(false);
 validator.validateFields([{field: "field", rule: "rule" }]);
 validator.isEmpty(value);
 ```
 
-#Examples
+```sh
+  function validateFields(fields);
+  fields is an array of objects with the following composition:
+  {
+    field: input selector,
+    rule: string / array with the validation rules,
+    message: custom message you might wanna send
+  }
+```
+
+## Examples
 
 Simple validator example
 ```sh
@@ -51,7 +49,7 @@ Simple validator example
 <input type="text" class="email"/>
 ```
 
-example using validator helper functions
+Example using validator helper functions
 
 ```sh
 <script>
@@ -65,7 +63,7 @@ example using validator helper functions
 </script>
 ```
 
-example with ruleValue and custom message
+Example with ruleValue and custom message
 
 ```sh
 <script>
@@ -76,4 +74,4 @@ example with ruleValue and custom message
 <input type="text" id="age"/>
 ```
 
-MIT License
+### MIT License
