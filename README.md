@@ -75,3 +75,5 @@ Example with ruleValue and custom message
 ```
 
 ### MIT License
+
+### Check projects tab to see roadmap for this library
