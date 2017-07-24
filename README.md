@@ -1,4 +1,4 @@
-# Current state
+#Current avaiable functions
   - isValid
   - isEmpty
   - isPositve
@@ -6,7 +6,7 @@
   - isArray
   - isObject
 
-# isValid
+#isValid
 Function that validates fields
 
 Currently supports the following rules:
