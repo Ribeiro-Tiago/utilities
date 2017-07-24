@@ -1,19 +1,27 @@
-# Validator
-Helper class that validates fields and has other helper functions such as isEmpty, isNumber, etc
+# Current state
+  - isValid
+  - isEmpty
+  - isPositve
+  - isEven
+  - isArray
+  - isObject
 
-Currently supports the following:
+# isValid
+Function that validates fields
+
+Currently supports the following rules:
   - required
-  - email
   - number
   - even
-  - maxlen
-  - minlen
   - maxvalue
   - minvalue
   - positive
   - value
-
-### requires jquery to work
+  - maxlen
+  - minlen
+  - email
+  - equal
+  - phone
 
 #Instalation
 Simply include the script to your file: ``<script src="path/to/script"></script>``
