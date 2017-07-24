@@ -1,0 +1,21 @@
+.has-error {
+	margin-bottom: 15px;
+}
+
+	.has-error .error-wrapper {
+		display: inline-block;
+	}
+
+		.error-wrapper input {
+			outline: #a94442;
+			border-color: #a94442;
+		}
+
+		.error-wrapper span {
+			font-size: 11px;
+			display: block;
+			margin-top: 5px;
+			position: absolute;
+			color: #a94442;
+			margin-left: 5px;
+		}
