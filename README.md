@@ -1,4 +1,4 @@
-#Current avaiable functions
+# Current avaiable functions
   - isValid
   - isEmpty
   - isPositve
@@ -6,7 +6,7 @@
   - isArray
   - isObject
 
-#isValid
+# isValid
 Function that validates fields
 
 Currently supports the following rules:
@@ -23,10 +23,10 @@ Currently supports the following rules:
   - equal
   - phone
 
-#Instalation
+## Instalation
 Simply include the script to your file: ``<script src="path/to/script"></script>``
 
-#Usage
+## Usage
 Validator recieves a boolean argument (defaults to true) that tells the validator if we want to handle the errors (add DOM elements with error message) or just return the result of the validation.
 ```sh
 var validator = new Validator(false);
