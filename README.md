@@ -1,3 +1,5 @@
+# Still in development
+
 # Current avaiable functions
   - isValid
   - isEmpty
@@ -84,4 +86,4 @@ Example with ruleValue and custom message
 
 ### MIT License
 
-### Check projects tab to see roadmap for this library
+[Roadmap](https://github.com/Ribeiro-Tiago/utilities/projects/1)
