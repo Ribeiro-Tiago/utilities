@@ -16,10 +16,10 @@ Simply download and include the script to your file: ``<script src="path/to/scri
 If you want this lib to also handle validation errors (correctly) on isValid function, you must also download and include de css file ``<link rel="stylesheet" href="css/style.css">``
 
 # Usage
-Validator recieves a boolean argument (defaults to true) that tells the validator if we want to handle the errors (add DOM elements with error message) or just return the result of the validation.
+Independetly of which enviorenment you're working on, all you need to do is call the object util.function, for example, `` util.isEmpty(value)`` 
 
-# isValid
-This function validates DOM fields or simple values
+## isValid
+This function validates DOM fields or simple values. Some of the rules also require a rule value, for instance when you using maxvalue you have to specify what's the max value.
 
 Currently supports the following rules:
   - required
@@ -36,16 +36,78 @@ Currently supports the following rules:
   - phone
 
 ## Examples
-
 There are several ways for you to validate what you need. You can:
-   - validate only one field with one 
+   - validate only one field with one validation rule
+   - validate only one field with multiple validation rule
+   - validate multiple fields with one validation rule each
+   - validate multiple fields with multiple validation rule each
+   - validate multiple fields with one validation rule for some fields and multiple for others
+You can also have a specific custom message for each validation rule
 
+### one field, one rule
 ```sh
-
+  util.isValid({
+    input: value,
+    rule: "required"
+  });
 ```
 
+### one field, multiple rules
 ```sh
-  
+  util.isValid({
+    input: value, 
+    rule: ["required", "number"]
+  });
+```
+
+### multiple fields, one rule each
+```sh
+  util.isValid([
+    {input: value, rule: "required"},
+    {input: value2, rule: "email"},
+    {input: value3, rule: "even"}
+  ]);
+```
+
+### multiple fields, multiple rules
+```sh
+  util.isValid([
+    {input: value, rule: ["required", "even"]},
+    {input: value2, rule: ["email", "positive"]}
+  ]);
+```
+
+### multiple fields, mixed rules
+```sh
+  util.isValid([
+    {input: value, rule: "required"},
+    {input: value2, rule: ["email", "positive"]}
+  ]);
+```
+
+### multiple rules with custom message each
+```sh
+  util.isValid([
+    {input: value, rule: "required"},
+    {input: value2, rule: [
+      {rule: "email", message: "Custom message"},
+      {rule: "positive", message: "Custom message 2"} 
+    ]}
+  ]);
+```
+
+### rules with rule value
+```sh
+  util.isValid([
+    {input: value, rule: "maxvalue", ruleValue: 5},
+    {input: value, rule: "required", message: "something"},
+    {input: value, rule: "maxvalue", ruleValue: 5, message: "another something"},
+    {input: value2, rule: [
+      {rule: "minlen", message: "Custom message", ruleValue: 5},
+      {rule: "positive", message: "Custom message 2"},
+      {rule: "required"}
+    ]}
+  ]);
 ```
 
 ## Examples
