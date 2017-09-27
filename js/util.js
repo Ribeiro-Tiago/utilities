@@ -116,7 +116,7 @@
                 }
             }
 
-            else if (rule === "value")
+            else if (rule === "equal")
             {
                 let incorrectValue = function(value){
                     return (parseInt(inputValue) !== parseInt(value));
@@ -164,19 +164,6 @@
                     errors.push({
                         error: message || "Invalid email!",
                         input: input
-                    });
-                }
-            }
-
-            else if (rule === "equal")
-            {
-                let tmp = (ruleValue.tagName) ? ruleValue.value : ruleValue;
-                
-                if (inputValue !== tmp.value)
-                {
-                    errors.push({
-                        error: message || "Values don't match!",
-                        input: [input, tmp]
                     });
                 }
             }
