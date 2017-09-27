@@ -2,20 +2,19 @@
 	margin-bottom: 15px;
 }
 
-	.has-error .error-wrapper {
-		display: inline-block;
+	.has-error input,
+	.has-error select,
+	.has-error textarea {
+		outline: #e8403c !important;
+		border: solid 1px #e8403c !important;
 	}
 
-		.error-wrapper input {
-			outline: #a94442;
-			border-color: #a94442;
-		}
-
-		.error-wrapper span {
-			font-size: 11px;
-			display: block;
-			margin-top: 5px;
-			position: absolute;
-			color: #a94442;
-			margin-left: 5px;
-		}
+	.has-error span {
+		font-size: 11px;
+		display: block;
+		margin-top: 5px;
+		position: absolute;
+		color: #e8403c;
+		margin-left: 5px;
+		font-weight: bold;
+	}
