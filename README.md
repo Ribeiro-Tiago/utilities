@@ -1,5 +1,3 @@
-# Still in development
-
 # Current avaiable functions
   - [isValid](#isvalid)
   - [isEmpty](#isempty)
@@ -242,7 +240,7 @@ arr.removeIfExists(2); // removes 2
 arr.removeIfExists(4); // does nothing
 ```
 
-## formatdate 
+## formatDate 
 Can be used either on an instantiated object or not. Recieves a date (either string or Date) and returns it in EU, US or MySQL-ready format based on the type.
 ```sh
 Date.formatDate(new Date(), type); 
@@ -252,9 +250,7 @@ or
 var d = new Date();
 d.formatDate(type); 
 ```
-Where type can be ``1 (EU format)``, ``2 (US format)`` or ``whatever else (MySQL-ready format)`` 
+Where type can be ``1 (EU format)``, ``2 (US format)`` or ``3 (database format)`` 
 
 
 # MIT License
-
-[Roadmap](https://github.com/Ribeiro-Tiago/utilities/projects/1)
