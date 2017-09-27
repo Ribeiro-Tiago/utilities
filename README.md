@@ -1,15 +1,25 @@
 # Still in development
 
 # Current avaiable functions
-  - isValid
-  - isEmpty
-  - isPositve
-  - isEven
-  - isArray
-  - isObject
+  - [isValid](#isvalid)
+  - [isEmpty](#isEmpty)
+  - [isPositve](#ispositive)
+  - [isEven](#iseven)
+  - [isArray](#isarray)
+  - [isObject](#isobject)
+  - [Array.pushUnique](#pushunique)
+  - [Array.removeIfExists](#removeifexists)
+  - [Date.formatDate](#formatdate)
+
+# Instalation
+Simply download and include the script to your file: ``<script src="path/to/script"></script>``
+If you want this lib to also handle validation errors (correctly) on isValid function, you must also download and include de css file ``<link rel="stylesheet" href="css/style.css">``
+
+# Usage
+Validator recieves a boolean argument (defaults to true) that tells the validator if we want to handle the errors (add DOM elements with error message) or just return the result of the validation.
 
 # isValid
-Function that validates fields
+This function validates DOM fields or simple values
 
 Currently supports the following rules:
   - required
@@ -25,25 +35,17 @@ Currently supports the following rules:
   - equal
   - phone
 
-## Instalation
-Simply include the script to your file: ``<script src="path/to/script"></script>``
+## Examples
 
-## Usage
-Validator recieves a boolean argument (defaults to true) that tells the validator if we want to handle the errors (add DOM elements with error message) or just return the result of the validation.
+There are several ways for you to validate what you need. You can:
+   - validate only one field with one 
+
 ```sh
-var validator = new Validator(false);
-validator.validateFields([{field: "field", rule: "rule" }]);
-validator.isEmpty(value);
+
 ```
 
 ```sh
-  function validateFields(fields);
-  fields is an array of objects with the following composition:
-  {
-    field: input selector,
-    rule: string / array with the validation rules,
-    message: custom message you might wanna send
-  }
+  
 ```
 
 ## Examples
