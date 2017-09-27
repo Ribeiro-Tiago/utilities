@@ -23,17 +23,17 @@ This function validates DOM fields or simple values. Some of the rules also requ
 
 Currently supports the following rules:
   - [required](#required)
-  - number
-  - even
-  - maxvalue
-  - minvalue
-  - positive
-  - value
-  - maxlen
-  - minlen
-  - email
-  - equal
-  - phone
+  - [number](#number)
+  - [even](#even)
+  - [maxvalue](#maxvalue)
+  - [minvalue](#minvalue)
+  - [positive](#positive)
+  - [value](#value)
+  - [maxlen](#maxlen)
+  - [minlen](#minlen)
+  - [email](#email)
+  - [equal](#equal)
+  - [phone](#phone)
 
 ### Examples
 There are several ways for you to validate what you need. You can:
@@ -110,43 +110,43 @@ util.isValid([
 ]);
 ```
 
-## required
+### required
 Checks if the value has something
 ```sh
 util.isValid({input: value, rule: "required"});
 ```
 
-## number
+### number
 Checks if the value is a number
 ```sh
 util.isValid({input: value, rule: "number"});
 ```
 
-## even
+### even
 Checks if the value is a number and if it's an even number
 ```sh
 util.isValid({input: value, rule: "even"});
 ```
 
-## maxvalue
+### maxvalue
 Checks if the value is lower than the given rule value
 ```sh
 util.isValid({input: value, rule: "maxvalue", ruleValue: 5});
 ```
 
-## minvalue
+### minvalue
 Checks if the value is higher than the given rule value
 ```sh
 util.isValid({input: value, rule: "minvalue", ruleValue: 5});
 ```
 
-## postive
+### postive
 Checks if the value is a number and if it's positive
 ```sh
 util.isValid({input: value, rule: "maxvalue", ruleValue: 5});
 ```
 
-## equal 
+### equal 
 Checks if the value equals the value(s) from the rule value
 ```sh
 util.isValid({input: value, rule: "equal", ruleValue: 5});
@@ -156,25 +156,25 @@ or
 util.isValid({input: value, rule: "equal", ruleValue: [5, 2, 3]});
 ```
 
-## maxlen
+### maxlen
 Checks if the value length is lower than the given rule value
 ```sh
 util.isValid({input: value, rule: "maxlen", ruleValue: 5});
 ```
 
-## minlen
+### minlen
 Checks if the value length is higher than the given rule value
 ```sh
 util.isValid({input: value, rule: "minlen", ruleValue: 5});
 ```
 
-## email
+### email
 Checks if the value is a valid email
 ```sh
 util.isValid({input: value, rule: "email"});
 ```
 
-## phone
+### phone
 Checks if the value is a valid phone number, according to the cirteria set by the rule value
 ```sh
 util.isValid({input: value, rule: "phone", ruleValue: ["### ### ###", "#########"]});
