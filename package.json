@@ -1,0 +1,31 @@
+{
+  "name": "utilities",
+  "version": "1.0.0",
+  "description": "Utilitarian functions (such has value validations, array and date manipulation) that help day-to-day life",
+  "main": "util.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ribeiro-Tiago/utilities.git"
+  },
+  "keywords": [
+    "javascript",
+    "nodejs",
+    "utilities",
+    "utilitarian",
+    "value",
+    "validation",
+    "array",
+    "manipulation",
+    "date",
+    "manipulation"
+  ],
+  "author": "Tiago Ribeiro - http://www.tiago-ribeiro.com/",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ribeiro-Tiago/utilities/issues"
+  },
+  "homepage": "https://github.com/Ribeiro-Tiago/utilities#readme"
+}
