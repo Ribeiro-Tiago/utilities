@@ -22,7 +22,7 @@ Independetly of which enviorenment you're working on, all you need to do is call
 This function validates DOM fields or simple values. Some of the rules also require a rule value, for instance when you using maxvalue you have to specify what's the max value.
 
 Currently supports the following rules:
-  - required
+  - [required](#required)
   - number
   - even
   - maxvalue
@@ -35,7 +35,7 @@ Currently supports the following rules:
   - equal
   - phone
 
-## Examples
+### Examples
 There are several ways for you to validate what you need. You can:
    - validate only one field with one validation rule
    - validate only one field with multiple validation rule
@@ -44,7 +44,7 @@ There are several ways for you to validate what you need. You can:
    - validate multiple fields with one validation rule for some fields and multiple for others
 You can also have a specific custom message for each validation rule
 
-### one field, one rule
+#### One field, one rule
 ```sh
   util.isValid({
     input: value,
@@ -52,7 +52,7 @@ You can also have a specific custom message for each validation rule
   });
 ```
 
-### one field, multiple rules
+#### One field, multiple rules
 ```sh
   util.isValid({
     input: value, 
@@ -60,7 +60,7 @@ You can also have a specific custom message for each validation rule
   });
 ```
 
-### multiple fields, one rule each
+#### Multiple fields, one rule each
 ```sh
   util.isValid([
     {input: value, rule: "required"},
@@ -69,7 +69,7 @@ You can also have a specific custom message for each validation rule
   ]);
 ```
 
-### multiple fields, multiple rules
+#### Multiple fields, multiple rules
 ```sh
   util.isValid([
     {input: value, rule: ["required", "even"]},
@@ -77,7 +77,7 @@ You can also have a specific custom message for each validation rule
   ]);
 ```
 
-### multiple fields, mixed rules
+#### Multiple fields, mixed rules
 ```sh
   util.isValid([
     {input: value, rule: "required"},
@@ -85,7 +85,7 @@ You can also have a specific custom message for each validation rule
   ]);
 ```
 
-### multiple rules with custom message each
+#### Multiple rules with custom message each
 ```sh
   util.isValid([
     {input: value, rule: "required"},
@@ -96,13 +96,13 @@ You can also have a specific custom message for each validation rule
   ]);
 ```
 
-### rules with rule value
+#### Rules with rule value
 ```sh
   util.isValid([
     {input: value, rule: "maxvalue", ruleValue: 5},
-    {input: value, rule: "required", message: "something"},
-    {input: value, rule: "maxvalue", ruleValue: 5, message: "another something"},
-    {input: value2, rule: [
+    {input: value2, rule: "required", message: "something"},
+    {input: value3, rule: "maxvalue", ruleValue: 5, message: "another something"},
+    {input: value4, rule: [
       {rule: "minlen", message: "Custom message", ruleValue: 5},
       {rule: "positive", message: "Custom message 2"},
       {rule: "required"}
@@ -110,43 +110,8 @@ You can also have a specific custom message for each validation rule
   ]);
 ```
 
-## Examples
-
-Simple validator example
-```sh
-<script>
-  var validator = new Validator();
-  validator.validateFields([{field: "#name", rule: "required"}, {field: "#email", rule: ["required", "email"]}]);
-</script>
-
-<input type="text" id="name"/>
-<input type="text" class="email"/>
-```
-
-Example using validator helper functions
-
-```sh
-<script>
-  var validator = new Validator();
-  function test(args){
-      if (validator.isEmpty(args)) 
-        return true;
-      else
-        return false;
-  }
-</script>
-```
-
-Example with ruleValue and custom message
-
-```sh
-<script>
-  var validator = new Validator();
-  validator.validateFields([{field: "#age", rule: ["required", "number", "positive", {rule: "maxvalue", value: "120", message: "Come on, you're not that old!"}]}]);
-</script>
-
-<input type="text" id="age"/>
-```
+### required
+something something
 
 ### MIT License
 
