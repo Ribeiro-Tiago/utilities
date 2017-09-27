@@ -1,8 +1,6 @@
-# Still in development
-
 # Current avaiable functions
   - [isValid](#isvalid)
-  - [isEmpty](#isEmpty)
+  - [isEmpty](#isempty)
   - [isPositve](#ispositive)
   - [isEven](#iseven)
   - [isArray](#isarray)
@@ -19,7 +17,20 @@ If you want this lib to also handle validation errors (correctly) on isValid fun
 Independetly of which enviorenment you're working on, all you need to do is call the object util.function, for example, `` util.isEmpty(value)`` 
 
 ## isValid
-This function validates DOM fields or simple values. Some of the rules also require a rule value, for instance when you using maxvalue you have to specify what's the max value.
+This function validates DOM fields or simple values. Some of the rules also require a rule value, for instance when you using maxvalue you have to specify what's the max value. Every rule has it's own error message, however you can send your own custom error message (showed below).
+This function accepts either and object or an array of objects. This object contains the field / value to be validated, the rule, a custom message (optional), ruleValue (depends on the which rule we're applying) and optional (which is in itself optional)
+
+Object composition: 
+```sh
+{
+  field: DOM element or value,
+  rule: validation rule (string),
+  message: a custom message you want for validation errors (string),
+  ruleValue: some rules require a rulevalue (see below) 
+  optional: for the times when a value is optional but must meet certain criteria (boolean)
+}
+```
+    
 
 Currently supports the following rules:
   - [required](#required)
@@ -28,7 +39,6 @@ Currently supports the following rules:
   - [maxvalue](#maxvalue)
   - [minvalue](#minvalue)
   - [positive](#positive)
-  - [value](#value)
   - [maxlen](#maxlen)
   - [minlen](#minlen)
   - [email](#email)
@@ -140,7 +150,7 @@ Checks if the value is higher than the given rule value
 util.isValid({input: value, rule: "minvalue", ruleValue: 5});
 ```
 
-### postive
+### positive
 Checks if the value is a number and if it's positive
 ```sh
 util.isValid({input: value, rule: "maxvalue", ruleValue: 5});
@@ -184,7 +194,63 @@ or
 util.isValid({input: value, rule: "phone", ruleValue: "#########"});
 ```
 
+## isEmpty
+Pretty self explanatory, checks if the value is empty. Returns true if it is and false otherwise
+```sh
+util.isEmpty(value) 
+```
+
+## isPositive
+Checks if the value is numeric and positive. Returns true if it is and false otherwise
+```sh
+util.isPositive(value) 
+```
+
+## isEven
+Checks if the value is numeric and even. Returns true if it is and false otherwise
+```sh
+util.isEven(value) 
+```
+
+## isArray
+Checks if the value is an array. Returns true if it is and false otherwise
+```sh
+util.isArray(value) 
+```
+
+## isObject
+Checks if the value is an object. Returns true if it is and false otherwise
+```sh
+util.isObject(value) 
+```
+
+## pushUnique
+This is a Array.prototype function meaning it's only accessable through a instantiated array. This function checks if the value exists on the array and if it doesn't it'll push it in.
+```sh
+var arr = [1, 2, 3];
+arr.pushUnique(2); // does nothing
+arr.pushUnique(4); // adds 4 to the array
+```
+
+## removeIfExists
+Also a prototype function. This one checks if an element exists in the array and if so, removes it.
+```sh
+var arr = [1, 2, 3];
+arr.removeIfExists(2); // removes 2
+arr.removeIfExists(4); // does nothing
+```
+
+## formatDate 
+Can be used either on an instantiated object or not. Recieves a date (either string or Date) and returns it in EU, US or MySQL-ready format based on the type.
+```sh
+Date.formatDate(new Date(), type); 
+```
+or 
+```sh
+var d = new Date();
+d.formatDate(type); 
+```
+Where type can be ``1 (EU format)``, ``2 (US format)`` or ``3 (database format)`` 
+
 
 # MIT License
-
-[Roadmap](https://github.com/Ribeiro-Tiago/utilities/projects/1)
