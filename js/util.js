@@ -3,7 +3,7 @@
  * @description Helper class that has several utilitary functions such as field validation, isEmpty, isArray, etc
  * @see https://github.com/Ribeiro-Tiago/util
  * @copyright MIT license, 2017
- * @version 1.0.5
+ * @version 1.0.6
  */
 
 /**
@@ -11,7 +11,6 @@
  */
 (function(){
     'use strict'
-
 
     /**
      * Validates the recieved obj according the validation rules recieved
@@ -38,8 +37,7 @@
          * @throws {Error} - throws exception if rule is valid or one of the ruleValues isn't valid
          */
         let validate = function(input, rule, message, ruleValue, optional){
-            let isinputDOM = (input.tagName);
-            let inputValue = (isinputDOM) ? input.value : input;
+            let inputValue = (input.tagName) ? input.value : input[0].value;
             
             if (optional && isEmpty(inputValue))
                 return true;
@@ -220,7 +218,7 @@
                 else if (isObject(rule))
                     validate(input, rule.rule, rule.message, rule.value, rule.optional);
                 else
-                    validate(input, rule, item.message, item.optional);
+                    validate(input, rule, item.message, item.value, item.optional);
             }
             
             // since it's now possible validate more than one input with the same rules we need 
@@ -298,14 +296,18 @@
         }
         
         Array.prototype.forEach.call(errors, function(item, index){
-            if (isArray(item.field))
+            let getParent = (elem) => {
+                return (util.isDOM(elem)) ? elem.parentElement : elem[0].parentElement;
+            }
+
+            if (isArray(item.input))
             {
-                Array.prototype.forEach.call(item.field, function(field){
-                    addValidationErrors(field.parentElement, item.error);
+                Array.prototype.forEach.call(item.input, function(input){
+                    addValidationErrors(getParent(input), item.error);
                 })
             }
             else 
-                addValidationErrors(item.field.parentElement, item.error);
+                addValidationErrors(getParent(item.input), item.error);
         });
     };
 
@@ -370,14 +372,19 @@
     /**
      * Validates recieved value to see if it's an array
      * @param {Array} value - value to validate
-     * @throws {Error} - throws exception if is empty
      * @return {boolean} true if it's array, false if not
      */
     let isArray = function(value){
-        if (this.isEmpty(value))
-            throw new Error("Value is empty!");
-        
         return Object.prototype.toString.call(value) === '[object Array]';
+    };
+
+    /**
+     * Validates recieved value to see if it's an array
+     * @param {Array} value - value to validate
+     * @return {boolean} true if it's array, false if not
+     */
+    let isDOM = function(value){
+        return Object.prototype.toString.call(value) === '[object HTMLInputElement]';
     };
 
     /**
@@ -387,7 +394,7 @@
      * @return {boolean} true if it's object, false if not
      */
     let isObject = function(value){
-        if (this.isEmpty(value))
+        if (isEmpty(value))
             throw new Error("Value is empty!");
 
         return typeof value === "object";
@@ -462,7 +469,8 @@
         isPositive,
         isEven,
         isArray,
-        isObject
+        isObject,
+        isDOM
     };
     
     // add support for Node, Browser and AMD
