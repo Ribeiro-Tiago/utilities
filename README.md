@@ -5,6 +5,7 @@
   - [isEven](#iseven)
   - [isArray](#isarray)
   - [isObject](#isobject)
+  - [isDOM](#isdom)
   - [Array.pushUnique](#pushunique)
   - [Array.removeIfExists](#removeifexists)
   - [Date.formatDate](#formatdate)
@@ -216,6 +217,12 @@ util.isEven(value)
 Checks if the value is an array. Returns true if it is and false otherwise
 ```sh
 util.isArray(value) 
+```
+
+## isDOM
+Checks if the value is an HTML DOM object. Returns true if it is and false otherwise
+```sh
+util.isDOM(value)
 ```
 
 ## isObject

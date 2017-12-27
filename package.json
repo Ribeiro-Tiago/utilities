@@ -1,6 +1,6 @@
 {
   "name": "utilities-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utilitarian functions (such has value validations, array and date manipulation) that help day-to-day life",
   "main": "util.js",
   "scripts": {
