@@ -397,7 +397,7 @@
         if (isEmpty(value))
             throw new Error("Value is empty!");
 
-        return typeof value === "object";
+        return Object.prototype.toString.call(value) === '[object Object]';
     };
 
     /**
