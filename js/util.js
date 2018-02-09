@@ -486,6 +486,20 @@
         });
     }
 
+    // react native 
+    else if (React) {
+        export {
+            isValid,
+            isNumber,
+            isEmpty,
+            isPositive,
+            isEven,
+            isArray,
+            isObject,
+            isDOM
+        }
+    }
+
     // browser
     else {
         window.util = util;
