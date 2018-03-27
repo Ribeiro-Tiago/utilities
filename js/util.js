@@ -3,7 +3,7 @@
  * @description Helper class that has several utilitary functions such as field validation, isEmpty, isArray, etc
  * @see https://github.com/Ribeiro-Tiago/util
  * @copyright ISC license, 2017
- * @version 1.0.7
+ * @version 1.0.8
  */
 
 /**
