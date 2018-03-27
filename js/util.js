@@ -2,8 +2,8 @@
  * @author Tiago Ribeiro - www.tiago-ribeiro.com
  * @description Helper class that has several utilitary functions such as field validation, isEmpty, isArray, etc
  * @see https://github.com/Ribeiro-Tiago/util
- * @copyright MIT license, 2017
- * @version 1.0.6
+ * @copyright ISC license, 2017
+ * @version 1.0.7
  */
 
 /**
@@ -401,6 +401,24 @@
     };
 
     /**
+     * Checks whether or not the received value is a string
+     * @param {*} value - value to be checked
+     * @return {boolean} - returns true if the value is array and false otherwise
+     */
+    let isString = (value) => {
+        return typeof value === "string";
+    };
+
+    /**
+     * Checks whether or not the received value is a function
+     * @param {*} value - value to be checked
+     * @return {boolean} - returns true if the value is object and false otherwise
+     */
+    let isFunction = (value) => {
+        return Object.toString.call(value) === '[object Function]';
+    };
+
+    /**
      * Pushes the new value to an array only if that value doesn't exist yet
      * @param {*} value - value to be inserted 
      * @return {boolean} - true if it didn't exist and we managed to push, false otherwise
@@ -470,25 +488,15 @@
         isEven,
         isArray,
         isObject,
-        isDOM
+        isDOM,
+        isString,
+        isFunction
     };
     
-    // add support for Node, Browser and AMD
-    // node js 
-    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-        module.exports = util;
-    }
-
-    // AMD
-    else if (typeof define === 'function' && define.amd) {
-        define([], function() {
-            return util;
-        });
-    }
-
-    // react native 
-    else if (React) {
-        export {
+    // add support for Node, React, Browser and AMD
+    // node js or react
+    if ((typeof module !== 'undefined' && typeof module.exports !== 'undefined') || (typeof navigator != 'undefined' && navigator.product == 'ReactNative')) {
+        module.exports = {
             isValid,
             isNumber,
             isEmpty,
@@ -496,8 +504,17 @@
             isEven,
             isArray,
             isObject,
-            isDOM
-        }
+            isDOM,
+            isString,
+            isFunction
+        };
+    }
+
+    // AMD
+    else if (typeof define === 'function' && define.amd) {
+        define([], function() {
+            return util;
+        });
     }
 
     // browser

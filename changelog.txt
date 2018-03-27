@@ -1,0 +1,4 @@
+version 1.0.7
+- added isString
+- added isFunction
+- added support for react native (not tested on reactjs but should work)
