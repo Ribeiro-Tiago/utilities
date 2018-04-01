@@ -20,7 +20,7 @@
      * @throws {Error} - throws this exception if arguments are empty
      * @return {boolean} - returns true if every input is valid and false if not
      */
-    let isValid = function(obj, errorHandle){
+    const isValid = function(obj, errorHandle){
         let handleErrors = ((typeof module !== 'undefined' && typeof module.exports !== 'undefined') || (typeof define === 'function' && define.amd)) ? false : (errorHandle || true);
         
         if (isEmpty(obj))
@@ -36,7 +36,7 @@
          * @param {number} ruleValue - if the validation needs a value (e.g.: maxvalue, minvalue), this is that value
          * @throws {Error} - throws exception if rule is valid or one of the ruleValues isn't valid
          */
-        let validate = function(input, rule, message, ruleValue, optional){
+        const validate = function(input, rule, message, ruleValue, optional){
             let inputValue = (input.tagName) ? input.value : input[0].value;
             
             if (optional && isEmpty(inputValue))
@@ -198,7 +198,7 @@
          * Goes through obj and rules and calls validate function
          * @param {object} item - object with values (field, rule, etc)
          */
-        let parseObj = function(item){
+        const parseObj = function(item){
             let rule = item.rule;
             let input = item.input;
 
@@ -208,7 +208,7 @@
              * we've to access the object elements, if it's neither we simply send the respective values
              * @param {*} input - input we're preparing to validate 
              */
-            let parseInput = function(input){
+            const parseInput = function(input){
                 if (isArray(rule))
                 {
                     Array.prototype.forEach.call(rule, function(current, index){
@@ -274,7 +274,7 @@
      * Creates DOM elements to show validation errors to the user
      * @param {Object} errors - array with the errors: element that failed validation and error
      */
-    let handleValidationErrors = function(errors){
+    const handleValidationErrors = function(errors){
         removeValdiationErrors();
 
         /**
@@ -315,7 +315,7 @@
      * Removes error DOM elements by removing error-wrapper elements and 
      * has-error class from parent elems
      */
-    let removeValdiationErrors = function(){
+    const removeValdiationErrors = function(){
         let elems = document.getElementsByClassName("error-span");
         
         for (let i = elems.length-1; i >= 0; i--){
@@ -329,7 +329,7 @@
      * @param {*} value - value to validate
      * @return {boolean} - true if it's number only, false if not
      */
-    let isNumber = function(value){
+    const isNumber = function(value){
         let regex = new RegExp(/^[0-9]+$/);
         return (regex.test(parseInt(value)));
     };
@@ -339,7 +339,7 @@
      * @param {*} value - value to check
      * @return {boolean} true if it's empty and false if not
      */
-    let isEmpty = function(value){
+    const isEmpty = function(value){
         return (value === void 0 || value === "" || value === null || String(value).toLocaleLowerCase() === "null" || value === "undefined" || (typeof value === "object" && Object.keys(value).length === 0));
     };
 
@@ -349,7 +349,7 @@
      * @throws {Error} - throws exception if value isn't number
      * @return {boolean} true if it's positive and false if not
      */
-    let isPositive = function(value){
+    const isPositive = function(value){
         if (!isNumber(value))
             throw Error("Value isn't a number!");
 
@@ -362,7 +362,7 @@
      * @throws {Error} - throws exception if value isn't number
      * @return {boolean} true if it's even, false if not
      */
-    let isEven = function(value){
+    const isEven = function(value){
         if (!isNumber(value))
             throw new Error("Value isn't a number");
             
@@ -374,7 +374,7 @@
      * @param {Array} value - value to validate
      * @return {boolean} true if it's array, false if not
      */
-    let isArray = function(value){
+    const isArray = function(value){
         return Object.prototype.toString.call(value) === '[object Array]';
     };
 
@@ -383,7 +383,7 @@
      * @param {Array} value - value to validate
      * @return {boolean} true if it's array, false if not
      */
-    let isDOM = function(value){
+    const isDOM = function(value){
         return Object.prototype.toString.call(value) === '[object HTMLInputElement]';
     };
 
@@ -393,7 +393,7 @@
      * @throws {Error} - throws exception if is empty
      * @return {boolean} true if it's object, false if not
      */
-    let isObject = function(value){
+    const isObject = function(value){
         if (isEmpty(value))
             throw new Error("Value is empty!");
 
@@ -405,7 +405,7 @@
      * @param {*} value - value to be checked
      * @return {boolean} - returns true if the value is array and false otherwise
      */
-    let isString = (value) => {
+    const isString = (value) => {
         return typeof value === "string";
     };
 
@@ -414,9 +414,21 @@
      * @param {*} value - value to be checked
      * @return {boolean} - returns true if the value is object and false otherwise
      */
-    let isFunction = (value) => {
-        return Object.toString.call(value) === '[object Function]';
+    const isFunction = (value) => {
+        return Object.toString.call(value) === '[object Function]' || typeof value === "function";
     };
+
+    /**
+     * Trims string edges and replaces all unsafe characters the escaped version (adds \\)
+     * @param {string} value - value to be checked
+     * @return {string} - returns escaped string
+     */
+    const escapeString = (value) => {
+        if (!isString(value))
+            throw new Error(`Expected param 0 of escapeString to be a string but ${typeof value} received}`);
+
+        return value.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
 
     /**
      * Pushes the new value to an array only if that value doesn't exist yet
@@ -480,7 +492,7 @@
     }
 
     // aggregades all functions in an objecto to export to the respective "platform"
-    let util = {
+    const utilities = {
         isValid,
         isNumber,
         isEmpty,
@@ -490,12 +502,18 @@
         isObject,
         isDOM,
         isString,
-        isFunction
+        isFunction,
+        escapeString
     };
     
     // add support for Node, React, Browser and AMD
-    // node js or react
-    if ((typeof module !== 'undefined' && typeof module.exports !== 'undefined') || (typeof navigator != 'undefined' && navigator.product == 'ReactNative')) {
+    // node js 
+    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+        module.exports = utilities;
+    }
+
+    // react
+    else if (typeof navigator != 'undefined' && navigator.product == 'ReactNative'){
         module.exports = {
             isValid,
             isNumber,
@@ -506,19 +524,20 @@
             isObject,
             isDOM,
             isString,
-            isFunction
+            isFunction,
+            escapeString
         };
     }
 
     // AMD
     else if (typeof define === 'function' && define.amd) {
         define([], function() {
-            return util;
+            return utilities;
         });
     }
 
     // browser
     else {
-        window.util = util;
+        window.util = utilities;
     }
 })(); 

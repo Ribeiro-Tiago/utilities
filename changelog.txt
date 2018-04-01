@@ -1,4 +1,9 @@
-version 1.0.7
+version 1.0.9
+- optmized isFunction
+- optmized compatibility with nodejs
+- added escapeString function
+
+version 1.0.8
 - added isString
 - added isFunction
 - added support for react native (not tested on reactjs but should work)
