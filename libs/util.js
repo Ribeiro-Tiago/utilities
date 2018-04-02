@@ -427,7 +427,7 @@
         if (!isString(value))
             throw new Error(`Expected param 0 of escapeString to be a string but ${typeof value} received}`);
 
-        return value.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return value.trim().replace(/[*+?^${}()|[\]\\]/, "\\$&").replace(/["']/g, "\$&");;
     }
 
     /**
