@@ -3,7 +3,7 @@
  * @description Helper class that has several utilitary functions such as isEmpty, isArray, formatDate, etc
  * @see https://github.com/Ribeiro-Tiago/util
  * @copyright MIT license, 2017
- * @version 1.1.0
+ * @version 1.1.1
  */
 
 (function(){
@@ -69,7 +69,7 @@
      * @return {boolean} true if it's array, false if not
      */
     const isDOM = function(value){
-        return Object.prototype.toString.call(value) === '[object HTMLInputElement]';
+        return Object.prototype.toString.call(value).indexOf("HTML") !== -1;
     };
 
     /**

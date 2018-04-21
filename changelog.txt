@@ -1,4 +1,7 @@
-version 1.0.10
+version 1.1.1
+- improvements to isDOM
+
+version 1.1.0
 - removed input validation to it's own library as it no longer made sense here (https://github.com/Ribeiro-Tiago/input-validator)
 
 version 1.0.9
