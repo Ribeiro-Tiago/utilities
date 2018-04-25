@@ -15,6 +15,9 @@
      * @return {boolean} - true if it's number only, false if not
      */
     const isNumber = function(value){
+        if (isEmpty(value))
+            throw new Error("Expected param 1 of isNumber to be something, null was received");
+        
         let regex = new RegExp(/^[0-9]+$/);
         return (regex.test(parseInt(value)));
     };
@@ -25,7 +28,7 @@
      * @return {boolean} true if it's empty and false if not
      */
     const isEmpty = function(value){
-        return (value === void 0 || value === "" || value === null || String(value).toLocaleLowerCase() === "null" || value === "undefined" || (typeof value === "object" && Object.keys(value).length === 0));
+        return (value === void 0 || value === "" || String(value).toLocaleLowerCase() === "null" || value === "undefined" || (typeof value === "object" && Object.keys(value).length === 0));
     };
 
     /**
@@ -60,6 +63,9 @@
      * @return {boolean} true if it's array, false if not
      */
     const isArray = function(value){
+        if (isEmpty(value))
+            throw new Error("Expected param 1 of isArray to be something, null was received");
+        
         return Object.prototype.toString.call(value) === '[object Array]';
     };
 
@@ -69,6 +75,9 @@
      * @return {boolean} true if it's array, false if not
      */
     const isDOM = function(value){
+        if (isEmpty(value))
+            throw new Error("Expected param 1 of isDOM to be something, null was received");
+        
         return Object.prototype.toString.call(value).indexOf("HTML") !== -1;
     };
 
@@ -80,7 +89,7 @@
      */
     const isObject = function(value){
         if (isEmpty(value))
-            throw new Error("Value is empty!");
+            throw new Error("Expected param 1 of isObject to be something, null was received");
 
         return Object.prototype.toString.call(value) === '[object Object]';
     };
@@ -101,7 +110,7 @@
      */
     const isFunction = (value) => {
         if (isEmpty(value))
-            throw new Error("Value is empty!");
+            throw new Error("Expected param 1 of isFunction to be something, null was received");
 
         return Object.toString.call(value) === '[object Function]' || typeof value === "function";
     };
@@ -116,7 +125,21 @@
             throw new Error(`Expected param 0 of escapeString to be a string but ${typeof value} received}`);
 
         return value.trim().replace(/[*+?^${}()|[\]\\]/, "\\$&").replace(/["']/g, "\$&");;
-    }
+    };
+
+    /**
+     * Checks if received value is boolean by comparing the type of value to type of the logical value "true"
+     * @param {string} value - value to be checked
+     * @throws {Error} if the value is empty 
+     * @return {boolean} - true if it's boolean and false if not
+     */
+    const isBoolean = (value) => {
+        if (isEmpty(value)){
+            throw new Error("Expected param 1 of isBoolean to be something, null was received");
+        }
+
+        return (typeof(value) == typeof(true));
+    };
 
     /**
      * Pushes the new value to an array only if that value doesn't exist yet
@@ -124,8 +147,11 @@
      * @return {boolean} - true if it didn't exist and we managed to push, false otherwise
      */
     Array.prototype.pushUnique = function(value) {
-        if (this.inArray(value)) return false;
+        if (this.inArray(value)) 
+            return false;
+        
         this.push(value);
+    
         return true;
     };
 
@@ -134,9 +160,14 @@
      * @param {*} value - value to check
      */
     Array.prototype.removeIfExists = function(value) {
-        if (isEmpty(value)) return;
+        if (isEmpty(value))
+            return;
+
         let index = this.indexOf(value);
-        if (index === -1) return;
+
+        if (index === -1) 
+            return;
+
         this.splice(index, 1);
     };
 
@@ -145,38 +176,50 @@
      * @param {string|date} date - date in string or date we're formating
      * @param {integer} format - indicates if we're returning the date in EU, US or database format.
      * 1 > EU | 2 > US | 3 > database
+     * @param {boolean} withTime - tells us if we want to return the datetime or just date. Defaults to true
+     * @param {integer} seperator - tells us if we want the seperator to be "/" or "-". Defaults to "/"
+     * @throws {Error} if type isn't integer, withTime isn't boolean or seperator isn't "/" or "-"
      * @return {string} - returns a string with the formatted date
      */
-    Date.formatDate = function(date, type){
-        if (util.isEmpty(date))
-            throw new Error("Date is empty: ", date);
-
+    Date.formatDate = function(date, type, withTime = true, seperator = "/"){
+        if (!isNumber(type)) {
+            throw new Error(`Expected param 2 of FormatDate to be a integer. Received ${typeof type} instead`);
+        }
+        
+        if (!isBoolean(withTime)) {
+            throw new Error(`Expected param 3 of FormatDate to be a boolean. Received ${typeof withTime} instead`);
+        }
+        
+        if (seperator !== "/" && seperator !== "-") {
+            throw new Error(`Expected param 4 of FormatDate to be a \"/\" or \"-\". Received ${seperator} instead`);
+        }
+        
         try {
             let d = (date instanceof Date) ? date : new Date(date);
+            
+            let day = (d.getDate() < 10) ? `0${d.getDate()}` : d.getDate();
+            let month = (d.getMonth() < 10) ? `0${d.getMonth() + 1}` : d.getMonth() + 1;
+            let hour = (d.getHours() < 10) ? `0${d.getHours()}` : d.getHours();
+            let minute = (d.getMinutes() < 10) ? `0${d.getMinutes()}` : d.getMinutes();
+            let time = (withTime) ? `${hour}:${minute}   ` : "";
+
+            if (type === 1)
+                return `${time} ${day}${seperator}${month}${seperator}${d.getFullYear()}`;
+            else if (type === 2)
+                return `${time} ${month}${seperator}${day}${seperator}${d.getFullYear()}`;
+            else
+                return `${time} ${d.getFullYear()}${seperator}${month}/${day}`;
         }
         catch(ex){
             throw new Error("Invalid date: ", ex.message);
         }
-
-        let day = (d.getDate() < 10) ? "0" + d.getDate() : d.getDate();
-        let month = (d.getMonth() < 10) ? "0" + d.getMonth() : d.getMonth();
-        let hour = (d.getHours() < 10) ? "0" + d.getHours() : d.getHours();
-        let minute = (d.getMinutes() < 10) ? "0" + d.getMinutes() : d.getMinutes();
-        let time = hour + ":" + minute + "  ";
-
-        if (type === 1)
-            return time + day + "/" + month + "/" + d.getFullYear()
-        else if (type === 2)
-            return time + month + "/" + day + "/" + d.getFullYear();
-        else
-            return time + d.getFullYear() + "/" + month + "/" + day;
     }
 
     /**
      * Calls static format date method
      */
-    Date.prototype.formatDate = function(type){
-        Date.formatDate(this, type);
+    Date.prototype.formatDate = function(type, withTime = true){
+        Date.formatDate(this, type, withTime);
     }
 
     // aggregades all functions in an objecto to export to the respective "platform"
@@ -190,6 +233,7 @@
         isDOM,
         isString,
         isFunction,
+        isBoolean,
         escapeString
     };
     
@@ -211,6 +255,7 @@
             isDOM,
             isString,
             isFunction,
+            isBoolean,
             escapeString
         };
     }
