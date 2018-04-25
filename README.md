@@ -8,6 +8,7 @@
   - [isString](#isstring)
   - [isFunction](#isfunction)
   - [isNumber](#isnumber)
+  - [isBoolean](#isboolean)
   - [escapeString](#escapestring)
   - [Array.pushUnique](#pushunique)
   - [Array.removeIfExists](#removeifexists)
@@ -22,7 +23,7 @@ Depending on your development environment you may need to call `` util. `` or us
 ## isEmpty
 Pretty self explanatory, checks if the value is empty.
 Returns true if it is and false otherwise.
-```sh
+```javascript
 util.isEmpty(value) 
 ```
 
@@ -30,7 +31,7 @@ util.isEmpty(value)
 Checks if the value is numeric and positive.
 Throws an Error if the value isn't a number.
 Returns true if it is and false otherwise.
-```sh
+```javascript
 util.isPositive(value) 
 ```
 
@@ -38,21 +39,23 @@ util.isPositive(value)
 Checks if the value is numeric and even.
 Throws an Error if the value isn't a number
 Returns true if it is and false otherwise.
-```sh
+```javascript
 util.isEven(value) 
 ```
 
 ## isArray
 Checks if the value is an array.
+Throws Error if value is empty
 Returns true if it is and false otherwise.
-```sh
+```javascript
 util.isArray(value) 
 ```
 
 ## isDOM
-Checks if the value is an HTML DOM object.
+Checks if the value is a HTML DOM object.
+Throws Error if value is empty
 Returns true if it is and false otherwise.
-```sh
+```javascript
 util.isDOM(value)
 ```
 
@@ -60,30 +63,39 @@ util.isDOM(value)
 Checks if the value is an object.
 Throws an Error if the value is empty.
 Returns true if it is and false otherwise.
-```sh
+```javascript
 util.isObject(value) 
 ```
 
 ## isFunction
-Checks if the value is an function.
+Checks if the value is a function.
 Throws an Error if the value is empty.
 Returns true if it is and false otherwise.
-```sh
+```javascript
 util.isFunction(value) 
 ```
 
 ## isNumber
-Checks if the value is an number.
+Checks if the value is a number.
+Throws Error if value is empty
 Returns true if it is and false otherwise.
-```sh
+```javascript
 util.isNumber(value) 
+```
+
+## isBoolean
+Checks if the value is boolean.
+Throws Error if value is empty
+Returns true if it is and false otherwise.
+```javascript
+util.isBoolean(value) 
 ```
 
 ## escapeString
 Sanitizes a string, escaping special characters, double and single quotation marks and removing white spaces at the start and end of the string.
 Throws an Error if the value is not a string.
 Returns escaped string.
-```sh
+```javascript
 util.isObject(value) 
 ```
 
@@ -91,7 +103,7 @@ util.isObject(value)
 This is a Array.prototype function meaning it's only accessable through a instantiated array. 
 This function checks if the value exists on the array and if it doesn't it'll push it in.
 Returns false if the value is in the array and true otherwise.
-```sh
+```javascript
 var arr = [1, 2, 3];
 arr.pushUnique(2); // does nothing
 arr.pushUnique(4); // adds 4 to the array
@@ -100,25 +112,29 @@ arr.pushUnique(4); // adds 4 to the array
 ## removeIfExists
 Also a prototype function. This one checks if an element exists in the array and if so, removes it.
 Returns nothing.
-```sh
+```javascript
 var arr = [1, 2, 3];
 arr.removeIfExists(2); // removes 2
 arr.removeIfExists(4); // does nothing
 ```
 
 ## formatDate 
-Can be used either on an instantiated object or not. Formats a date to either EU, US or MySQL-ready.
+Can be used either on an instantiated object or not. 
+Formats a date to either EU, US or MySQL-ready. Can return date and time or date only. The seperator can be specified to either "/" or "-"
 Returns the formated date
 Throws an Error if the date is empty or if the date was invalid and couldn't create a date instance with the received date.
-```sh
-Date.formatDate(new Date(), type); 
+```javascript
+Date.formatDate(new Date(), type, withTime, seperator); 
 ```
 or 
-```sh
+```javascript
 var d = new Date();
 d.formatDate(type); 
 ```
-Where type can be ``1 (EU format)``, ``2 (US format)`` or ``3 (database format)`` 
+Where:
+type = ``1 (EU format)``, ``2 (US format)`` or ``3 (database format)`` 
+withTime = ``true`` or ``false``, defaulting to ``true``
+seperator = ``/`` or ``-``, defaulting to ``/``
 
 
 # MIT License
