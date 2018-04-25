@@ -1,3 +1,6 @@
+version 1.1.2
+- minor bugfixes
+
 version 1.1.1
 - improvements to isDOM
 - added isBoolean function

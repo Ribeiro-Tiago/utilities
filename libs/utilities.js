@@ -3,7 +3,7 @@
  * @description Helper class that has several utilitary functions such as isEmpty, isArray, formatDate, etc
  * @see https://github.com/Ribeiro-Tiago/util
  * @copyright MIT license, 2017
- * @version 1.1.1
+ * @version 1.1.2
  */
 
 (function(){
@@ -204,11 +204,11 @@
             let time = (withTime) ? `${hour}:${minute}   ` : "";
 
             if (type === 1)
-                return `${time} ${day}${seperator}${month}${seperator}${d.getFullYear()}`;
+                return `${time} ${day}${seperator}${month}${seperator}${d.getFullYear()}`.trim();
             else if (type === 2)
-                return `${time} ${month}${seperator}${day}${seperator}${d.getFullYear()}`;
+                return `${time} ${month}${seperator}${day}${seperator}${d.getFullYear()}`.trim();
             else
-                return `${time} ${d.getFullYear()}${seperator}${month}/${day}`;
+                return `${time} ${d.getFullYear()}${seperator}${month}${seperator}${day}`.trim();
         }
         catch(ex){
             throw new Error("Invalid date: ", ex.message);

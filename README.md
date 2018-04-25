@@ -129,12 +129,38 @@ Date.formatDate(new Date(), type, withTime, seperator);
 or 
 ```javascript
 var d = new Date();
-d.formatDate(type); 
+d.formatDate(type, withTime, seperator); 
 ```
 Where: <br/>
 type = ``1 (EU format)``, ``2 (US format)`` or ``3 (database format)`` <br/>
 withTime = ``true`` or ``false``, defaulting to ``true`` <br/>
 seperator = ``/`` or ``-``, defaulting to ``/`` <br/>
+
+# ChangeLog
+
+### Version 1.1.2
+- minor bugfixes
+
+### Version 1.1.1
+- improvements to isDOM
+- added isBoolean function
+- added better error messages for each function
+- fixed issues formatDate had
+- added param validation to formatDate
+- added more customizability to formatDate
+
+### Version 1.1.0
+- removed input validation to it's own library as it no longer made sense here (https://github.com/Ribeiro-Tiago/input-validator)
+
+### Version 1.0.9
+- optmized isFunction
+- optmized compatibility with nodejs
+- added escapeString function
+
+### Version 1.0.8
+- added isString
+- added isFunction
+- added support for react native (not tested on reactjs but should work)
 
 <br/><br/>
 
