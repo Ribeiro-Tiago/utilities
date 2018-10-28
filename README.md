@@ -18,7 +18,13 @@
 You can either download (dist/index.js) and include the script to your HTML: ``<script src="path/to/script"></script>`` or ``npm install --save utilities-js``
 
 # Usage
-Depending on your development environment you may need to call `` util. `` or use the functions directly. For instance if you're on browser and node you need to do `` util.isEmpty(value) `` but on react native you can import each function seperately:  `` import { isEmpty } from "utilities-js"; `` and then `` isEmpty(value) ``, or import them all, using `` const util = require("utilities-js") `` or `` import * as util from "utilities-js"`` .
+Depending on your development environment and how you import it, you may need to call `` util. `` or use the functions directly. For instance if you're on browser you need to do `` util.isEmpty(value) `` but on react native and node you can import each function seperately:  `` import { isEmpty } from "utilities-js"; `` and then `` isEmpty(value) ``, or import them all, using `` const util = require("utilities-js") `` or `` import * as util from "utilities-js"`` .
+
+Note: As I'm still testing this out on TypeScript, if you're using on TS you need to specify the type on your ``tsconfig.json`` file: 
+```json
+    "typeRoots": ["./node_modules"],
+    "types": ["utilities-js"],
+```
 
 ## Examples
 Note: All of these examples assume that either the script is included on HTML or imported using `` const util = require("utilities-js") `` or `` import * as util from "utilities-js" ``.
@@ -148,6 +154,10 @@ withTime = ``true`` or ``false``, defaulting to ``true`` <br/>
 seperator = ``/`` or ``-``, defaulting to ``/`` <br/>
 
 # ChangeLog
+
+### Version 1.1.3
+- Added testing 
+- Minor bugfixes to some functions
 
 ### Version 1.1.3 
 - Fixed bug with DateFormat
