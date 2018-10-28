@@ -1,10 +1,3 @@
-/**
- * @author Tiago Ribeiro - www.tiago-ribeiro.com
- * @description Helper script that has several utilitary functions such as isEmpty, isArray, formatDate, etc
- * @see https://github.com/Ribeiro-Tiago/utilities
- * @copyright MIT license, 2017
- * @version 1.1.4
- */
 declare module "utilities-js";
 declare interface Window {
     util: {
