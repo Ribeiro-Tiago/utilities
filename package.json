@@ -4,7 +4,8 @@
 	"description": "Utilitarian functions (such has value validations, array and date manipulation) that help day-to-day life",
 	"main": "index.js",
 	"scripts": {
-		"test": "mocha --require ts-node/register test/*.ts"
+		"test": "mocha --require ts-node/register test/*.ts",
+		"build": "webpack && cd src && mv utilities.d.ts \"../index.d.ts\""
 	},
 	"repository": {
 		"type": "git",

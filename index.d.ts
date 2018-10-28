@@ -5,6 +5,7 @@
  * @copyright MIT license, 2017
  * @version 1.1.4
  */
+declare module "utilities-js";
 declare interface Window {
     util: {
         isNumber: Function;
@@ -35,4 +36,3 @@ declare function isBoolean(value: any): boolean;
 declare function pushUnique(arr: any[], value: any): boolean;
 declare function removeIfExists(arr: any[], value: any): void;
 declare function formatDate(date: Date | string, format: number, withTime: boolean, seperator: string): string;
-//# sourceMappingURL=utilities.d.ts.map

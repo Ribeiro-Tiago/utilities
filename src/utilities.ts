@@ -6,6 +6,8 @@
  * @version 1.1.4
  */
 
+declare module "utilities-js";
+
 declare interface Window {
     util: {
         isNumber: Function,

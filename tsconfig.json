@@ -1,12 +1,10 @@
 {
+	"mode": "production",
 	"compilerOptions": {
 		"target": "es5",
 		"module": "commonjs",
 		"allowJs": false,
 		"declaration": true,
-		"declarationMap": true,
-		"sourceMap": true,
-		"outDir": "./types",
 		"strict": true,
 		"noImplicitAny": true,
 		"strictNullChecks": true,
