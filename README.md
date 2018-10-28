@@ -15,7 +15,7 @@
   - [Date.formatDate](#formatdate)
 
 # Instalation
-You can either download (index.js) and include the script to your HTML: ``<script src="path/to/script"></script>`` or ``npm install --save utilities-js``
+You can either download (dist/index.js) and include the script to your HTML: ``<script src="path/to/script"></script>`` or ``npm install --save utilities-js``
 
 # Usage
 Depending on your development environment you may need to call `` util. `` or use the functions directly. For instance if you're on browser and node you need to do `` util.isEmpty(value) `` but on react native you can import each function seperately:  `` import { isEmpty } from "utilities-js"; `` and then `` isEmpty(value) ``, or import them all, using `` const util = require("utilities-js") `` or `` import * as util from "utilities-js"`` .
@@ -180,4 +180,5 @@ seperator = ``/`` or ``-``, defaulting to ``/`` <br/>
 
 <br/><br/>
 
-# MIT License
+# License
+[MIT](https://couto.mit-license.org/)

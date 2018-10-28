@@ -1,7 +1,7 @@
 /**
  * @author Tiago Ribeiro - www.tiago-ribeiro.com
- * @description Helper class that has several utilitary functions such as isEmpty, isArray, formatDate, etc
- * @see https://github.com/Ribeiro-Tiago/util
+ * @description Helper script that has several utilitary functions such as isEmpty, isArray, formatDate, etc
+ * @see https://github.com/Ribeiro-Tiago/utilities
  * @copyright MIT license, 2017
  * @version 1.1.3
  */
@@ -254,12 +254,15 @@ declare interface Array<T> {
 
     // add support for Node, React, Browser and AMD
     // node js 
+    // @ts-ignore
     if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+        // @ts-ignore
         module.exports = utilities;
     }
 
     // react
     else if (typeof navigator != 'undefined' && navigator.product == 'ReactNative') {
+        // @ts-ignore
         module.exports = {
             isNumber,
             isEmpty,
