@@ -28,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/Ribeiro-Tiago/utilities/issues"
   },
-  "homepage": "https://github.com/Ribeiro-Tiago/utilities#readme"
+  "homepage": "https://github.com/Ribeiro-Tiago/utilities#readme",
+  "dependencies": {
+    "@types/node": "^10.12.0"
+  }
 }

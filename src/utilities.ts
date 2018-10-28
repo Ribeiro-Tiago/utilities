@@ -3,23 +3,39 @@
  * @description Helper class that has several utilitary functions such as isEmpty, isArray, formatDate, etc
  * @see https://github.com/Ribeiro-Tiago/util
  * @copyright MIT license, 2017
- * @version 1.1.2
+ * @version 1.1.3
  */
 
-(function(){
-    'use strict'
+declare interface Window {
+    util: any
+}
 
+/* interface for Date.prototype.function */
+declare interface Date {
+    formatDate(type: number, withTime: boolean, seperator: string): string;
+}
+
+/* interface for Date.function */
+declare interface DateConstructor {
+    formatDate(date: Date | String, type: number, withTime: boolean, seperator: string): string;
+}
+
+declare interface Array<T> {
+    pushUnique(value: any): boolean;
+    removeIfExists(value: any): void;
+}
+
+(function () {
     /**
      * Validates value to check if it's number only
      * @param {*} value - value to validate
      * @return {boolean} - true if it's number only, false if not
      */
-    const isNumber = function(value){
+    const isNumber = (value: any): boolean => {
         if (isEmpty(value))
             throw new Error("Expected param 1 of isNumber to be something, null was received");
-        
-        let regex = new RegExp(/^[0-9]+$/);
-        return (regex.test(parseInt(value)));
+
+        return (new RegExp(/^[0-9]+$/).test(value));
     };
 
     /**
@@ -27,7 +43,7 @@
      * @param {*} value - value to check
      * @return {boolean} true if it's empty and false if not
      */
-    const isEmpty = function(value){
+    const isEmpty = (value: any): boolean => {
         return (value === void 0 || value === "" || String(value).toLocaleLowerCase() === "null" || value === "undefined" || (typeof value === "object" && Object.keys(value).length === 0));
     };
 
@@ -37,7 +53,7 @@
      * @throws {Error} - throws exception if value isn't number
      * @return {boolean} true if it's positive and false if not
      */
-    const isPositive = function(value){
+    const isPositive = (value: number): boolean => {
         if (!isNumber(value))
             throw Error("Value isn't a number!");
 
@@ -50,44 +66,44 @@
      * @throws {Error} - throws exception if value isn't number
      * @return {boolean} true if it's even, false if not
      */
-    const isEven = function(value){
+    const isEven = (value: number): boolean => {
         if (!isNumber(value))
             throw new Error("Value isn't a number");
-            
+
         return (value % 2 === 0);
     };
 
     /**
      * Validates recieved value to see if it's an array
-     * @param {Array} value - value to validate
+     * @param {*} value - value to validate
      * @return {boolean} true if it's array, false if not
      */
-    const isArray = function(value){
+    const isArray = (value: any): boolean => {
         if (isEmpty(value))
             throw new Error("Expected param 1 of isArray to be something, null was received");
-        
+
         return Object.prototype.toString.call(value) === '[object Array]';
     };
 
     /**
      * Validates recieved value to see if it's an array
-     * @param {Array} value - value to validate
+     * @param {DOM} value - value to validate
      * @return {boolean} true if it's array, false if not
      */
-    const isDOM = function(value){
+    const isDOM = (value: any): boolean => {
         if (isEmpty(value))
             throw new Error("Expected param 1 of isDOM to be something, null was received");
-        
+
         return Object.prototype.toString.call(value).indexOf("HTML") !== -1;
     };
 
     /**
      * Validates recieved value to see if it's an array
-     * @param {number} value - value to validate
+     * @param {*} value - value to validate
      * @throws {Error} - throws exception if is empty
      * @return {boolean} true if it's object, false if not
      */
-    const isObject = function(value){
+    const isObject = (value: any): boolean => {
         if (isEmpty(value))
             throw new Error("Expected param 1 of isObject to be something, null was received");
 
@@ -99,16 +115,14 @@
      * @param {*} value - value to be checked
      * @return {boolean} - returns true if the value is array and false otherwise
      */
-    const isString = (value) => {
-        return typeof value === "string";
-    };
+    const isString = (value: any): boolean => typeof value === "string";
 
     /**
      * Checks whether or not the received value is a function
      * @param {*} value - value to be checked
      * @return {boolean} - returns true if the value is object and false otherwise
      */
-    const isFunction = (value) => {
+    const isFunction = (value: any): boolean => {
         if (isEmpty(value))
             throw new Error("Expected param 1 of isFunction to be something, null was received");
 
@@ -120,7 +134,7 @@
      * @param {string} value - value to be checked
      * @return {string} - returns escaped string
      */
-    const escapeString = (value) => {
+    const escapeString = (value: string): string => {
         if (!isString(value))
             throw new Error(`Expected param 0 of escapeString to be a string but ${typeof value} received}`);
 
@@ -129,16 +143,16 @@
 
     /**
      * Checks if received value is boolean by comparing the type of value to type of the logical value "true"
-     * @param {string} value - value to be checked
+     * @param {*} value - value to be checked
      * @throws {Error} if the value is empty 
      * @return {boolean} - true if it's boolean and false if not
      */
-    const isBoolean = (value) => {
-        if (isEmpty(value)){
+    const isBoolean = (value: any): boolean => {
+        if (isEmpty(value)) {
             throw new Error("Expected param 1 of isBoolean to be something, null was received");
         }
 
-        return (typeof(value) == typeof(true));
+        return (typeof (value) == typeof (true));
     };
 
     /**
@@ -146,12 +160,13 @@
      * @param {*} value - value to be inserted 
      * @return {boolean} - true if it didn't exist and we managed to push, false otherwise
      */
-    Array.prototype.pushUnique = function(value) {
-        if (this.inArray(value)) 
+    Array.prototype.pushUnique = function (value: any): boolean {
+        // @ts-ignore
+        if (this.includes(value))
             return false;
-        
+
         this.push(value);
-    
+
         return true;
     };
 
@@ -159,13 +174,13 @@
      * Checks to see if the value exists in the array and if so removes it
      * @param {*} value - value to check
      */
-    Array.prototype.removeIfExists = function(value) {
+    Array.prototype.removeIfExists = function (value: any): void {
         if (isEmpty(value))
             return;
 
         let index = this.indexOf(value);
 
-        if (index === -1) 
+        if (index === -1)
             return;
 
         this.splice(index, 1);
@@ -174,52 +189,52 @@
     /**
      * Formats the recieved date to EU, US or database format
      * @param {string|date} date - date in string or date we're formating
-     * @param {integer} format - indicates if we're returning the date in EU, US or database format.
+     * @param {number} format - indicates if we're returning the date in EU, US or database format.
      * 1 > EU | 2 > US | 3 > database
      * @param {boolean} withTime - tells us if we want to return the datetime or just date. Defaults to true
-     * @param {integer} seperator - tells us if we want the seperator to be "/" or "-". Defaults to "/"
+     * @param {string} seperator - tells us if we want the seperator to be "/" or "-". Defaults to "/"
      * @throws {Error} if type isn't integer, withTime isn't boolean or seperator isn't "/" or "-"
      * @return {string} - returns a string with the formatted date
      */
-    Date.formatDate = function(date, type, withTime = true, seperator = "/"){
-        if (!isNumber(type)) {
-            throw new Error(`Expected param 2 of FormatDate to be a integer. Received ${typeof type} instead`);
+    Date.formatDate = (date: Date | string, format: number, withTime: boolean = true, seperator: string = "/"): string => {
+        if (!isNumber(format)) {
+            throw new Error(`Expected param 2 of FormatDate to be a integer. Received ${typeof format} instead`);
         }
-        
+
         if (!isBoolean(withTime)) {
             throw new Error(`Expected param 3 of FormatDate to be a boolean. Received ${typeof withTime} instead`);
         }
-        
+
         if (seperator !== "/" && seperator !== "-") {
             throw new Error(`Expected param 4 of FormatDate to be a \"/\" or \"-\". Received ${seperator} instead`);
         }
-        
+
         try {
             let d = (date instanceof Date) ? date : new Date(date);
-            
+
             let day = (d.getDate() < 10) ? `0${d.getDate()}` : d.getDate();
             let month = (d.getMonth() < 10) ? `0${d.getMonth() + 1}` : d.getMonth() + 1;
             let hour = (d.getHours() < 10) ? `0${d.getHours()}` : d.getHours();
             let minute = (d.getMinutes() < 10) ? `0${d.getMinutes()}` : d.getMinutes();
             let time = (withTime) ? `${hour}:${minute}   ` : "";
 
-            if (type === 1)
+            if (format === 1)
                 return `${time} ${day}${seperator}${month}${seperator}${d.getFullYear()}`.trim();
-            else if (type === 2)
+            else if (format === 2)
                 return `${time} ${month}${seperator}${day}${seperator}${d.getFullYear()}`.trim();
             else
                 return `${time} ${d.getFullYear()}${seperator}${month}${seperator}${day}`.trim();
         }
-        catch(ex){
-            throw new Error("Invalid date: ", ex.message);
+        catch (ex) {
+            throw new Error(`Invalid date: ${ex.message}`);
         }
     }
 
     /**
      * Calls static format date method
      */
-    Date.prototype.formatDate = function(type, withTime = true){
-        Date.formatDate(this, type, withTime);
+    Date.prototype.formatDate = function (type: number, withTime: boolean = true, seperator: string = "/") {
+        return Date.formatDate(this, type, withTime, seperator);
     }
 
     // aggregades all functions in an objecto to export to the respective "platform"
@@ -236,7 +251,7 @@
         isBoolean,
         escapeString
     };
-    
+
     // add support for Node, React, Browser and AMD
     // node js 
     if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
@@ -244,7 +259,7 @@
     }
 
     // react
-    else if (typeof navigator != 'undefined' && navigator.product == 'ReactNative'){
+    else if (typeof navigator != 'undefined' && navigator.product == 'ReactNative') {
         module.exports = {
             isNumber,
             isEmpty,
@@ -260,9 +275,11 @@
         };
     }
 
-    // AMD
+    // AMD 
+    // @ts-ignore
     else if (typeof define === 'function' && define.amd) {
-        define([], function() {
+        // @ts-ignore
+        define([], function () {
             return utilities;
         });
     }
