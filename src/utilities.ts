@@ -3,7 +3,7 @@
  * @description Helper script that has several utilitary functions such as isEmpty, isArray, formatDate, etc
  * @see https://github.com/Ribeiro-Tiago/utilities
  * @copyright MIT license, 2017
- * @version 1.1.3
+ * @version 1.1.4
  */
 
 declare interface Window {
@@ -22,21 +22,6 @@ declare interface Window {
     }
 }
 
-/* interface for Date.prototype.function */
-declare interface Date {
-    formatDate(type: number, withTime: boolean, seperator: string): string;
-}
-
-/* interface for Date.function */
-declare interface DateConstructor {
-    formatDate(date: Date | String, type: number, withTime: boolean, seperator: string): string;
-}
-
-declare interface Array<T> {
-    pushUnique(value: any): boolean;
-    removeIfExists(value: any): void;
-}
-
 declare function isEmpty(value: any): boolean;
 declare function isNumber(value: any): boolean;
 declare function isEmpty(value: any): boolean;
@@ -49,7 +34,9 @@ declare function isString(value: any): boolean;
 declare function isFunction(value: any): boolean;
 declare function escapeString(value: string): string;
 declare function isBoolean(value: any): boolean;
-
+declare function pushUnique(arr: any[], value: any): boolean;
+declare function removeIfExists(arr: any[], value: any): void;
+declare function formatDate(date: Date | string, format: number, withTime: boolean, seperator: string): string;
 
 (function () {
     /**
@@ -180,12 +167,12 @@ declare function isBoolean(value: any): boolean;
      * @param {*} value - value to be inserted 
      * @return {boolean} - true if it didn't exist and we managed to push, false otherwise
      */
-    Array.prototype.pushUnique = function (value: any): boolean {
+    const pushUnique = (arr: any[], value: any): boolean => {
         // @ts-ignore
-        if (this.includes(value))
+        if (arr.includes(value))
             return false;
 
-        this.push(value);
+        arr.push(value);
 
         return true;
     };
@@ -194,16 +181,16 @@ declare function isBoolean(value: any): boolean;
      * Checks to see if the value exists in the array and if so removes it
      * @param {*} value - value to check
      */
-    Array.prototype.removeIfExists = function (value: any): void {
+    const removeIfExists = (arr: any[], value: any): void => {
         if (isEmpty(value))
             return;
 
-        let index = this.indexOf(value);
+        let index = arr.indexOf(value);
 
         if (index === -1)
             return;
 
-        this.splice(index, 1);
+        arr.splice(index, 1);
     };
 
     /**
@@ -216,7 +203,7 @@ declare function isBoolean(value: any): boolean;
      * @throws {Error} if type isn't integer, withTime isn't boolean or seperator isn't "/" or "-"
      * @return {string} - returns a string with the formatted date
      */
-    Date.formatDate = (date: Date | string, format: number, withTime: boolean = true, seperator: string = "/"): string => {
+    const formatDate = (date: Date | string, format: number, withTime: boolean = true, seperator: string = "/"): string => {
         if (!isNumber(format)) {
             throw new Error(`Expected param 2 of FormatDate to be a integer. Received ${typeof format} instead`);
         }
@@ -250,13 +237,6 @@ declare function isBoolean(value: any): boolean;
         }
     }
 
-    /**
-     * Calls static format date method
-     */
-    Date.prototype.formatDate = function (type: number, withTime: boolean = true, seperator: string = "/") {
-        return Date.formatDate(this, type, withTime, seperator);
-    }
-
     // aggregades all functions in an objecto to export to the respective "platform"
     const utilities = {
         isNumber,
@@ -269,31 +249,16 @@ declare function isBoolean(value: any): boolean;
         isString,
         isFunction,
         isBoolean,
+        pushUnique,
+        removeIfExists,
+        formatDate,
         escapeString
     };
 
     // add support for Node, React, Browser and AMD
-    // node js 
-    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    // node js || react native
+    if ((typeof module !== 'undefined' && typeof module.exports !== 'undefined') || (typeof navigator != 'undefined' && navigator.product == 'ReactNative')) {
         module.exports = utilities;
-    }
-
-    // react
-    else if (typeof navigator != 'undefined' && navigator.product == 'ReactNative') {
-        // @ts-ignore
-        module.exports = {
-            isNumber,
-            isEmpty,
-            isPositive,
-            isEven,
-            isArray,
-            isObject,
-            isDOM,
-            isString,
-            isFunction,
-            isBoolean,
-            escapeString
-        };
     }
 
     // AMD 
