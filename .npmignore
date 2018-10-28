@@ -1,4 +1,6 @@
-/libs
-index.html
-README.md
+node_modules/
+src/
 changelog.txt
+tsconfig.json
+package-lock.json
+webpack.config.js

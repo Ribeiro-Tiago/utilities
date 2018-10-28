@@ -15,19 +15,22 @@
   - [Date.formatDate](#formatdate)
 
 # Instalation
-You can either download and include the script to your file: ``<script src="path/to/script"></script>`` manually or you can use ecmascript 6's ``require("utilities-js")`` 
+You can either download (dist/index.js) and include the script to your HTML: ``<script src="path/to/script"></script>`` or ``npm install --save utilities-js``
 
 # Usage
-Depending on your development environment you may need to call `` util. `` or use the functions directly. For instance if you're on browser and node you need to do `` util.isEmpty(value) `` but on react native you can import each function seperately:  `` import { isEmpty } from "utilities-js"; `` and then `` isEmpty(value) `` .
+Depending on your development environment you may need to call `` util. `` or use the functions directly. For instance if you're on browser and node you need to do `` util.isEmpty(value) `` but on react native you can import each function seperately:  `` import { isEmpty } from "utilities-js"; `` and then `` isEmpty(value) ``, or import them all, using `` const util = require("utilities-js") `` or `` import * as util from "utilities-js"`` .
 
-## isEmpty
+## Examples
+Note: All of these examples assume that either the script is included on HTML or imported using `` const util = require("utilities-js") `` or `` import * as util from "utilities-js" ``.
+
+### isEmpty
 Pretty self explanatory, checks if the value is empty. <br/>
 Returns true if it is and false otherwise.
 ```javascript
 util.isEmpty(value) 
 ```
 
-## isPositive
+### isPositive
 Checks if the value is numeric and positive. <br/>
 Throws an Error if the value isn't a number. <br/>
 Returns true if it is and false otherwise.
@@ -35,7 +38,7 @@ Returns true if it is and false otherwise.
 util.isPositive(value) 
 ```
 
-## isEven
+### isEven
 Checks if the value is numeric and even. <br/>
 Throws an Error if the value isn't a number <br/>
 Returns true if it is and false otherwise.
@@ -43,7 +46,7 @@ Returns true if it is and false otherwise.
 util.isEven(value) 
 ```
 
-## isArray
+### isArray
 Checks if the value is an array. <br/>
 Throws Error if value is empty <br/>
 Returns true if it is and false otherwise.
@@ -51,7 +54,7 @@ Returns true if it is and false otherwise.
 util.isArray(value) 
 ```
 
-## isDOM
+### isDOM
 Checks if the value is a HTML DOM object. <br/>
 Throws Error if value is empty <br/>
 Returns true if it is and false otherwise.
@@ -59,7 +62,15 @@ Returns true if it is and false otherwise.
 util.isDOM(value)
 ```
 
-## isObject
+### isString
+Checks whether or not the received value is a string. <br/>
+Throws Error if value is empty <br/>
+Returns true if it is and false otherwise.
+```javascript
+util.isString(value)
+```
+
+### isObject
 Checks if the value is an object. <br/>
 Throws an Error if the value is empty. <br/>
 Returns true if it is and false otherwise.
@@ -67,7 +78,7 @@ Returns true if it is and false otherwise.
 util.isObject(value) 
 ```
 
-## isFunction
+### isFunction
 Checks if the value is a function. <br/>
 Throws an Error if the value is empty. <br/>
 Returns true if it is and false otherwise.
@@ -75,7 +86,7 @@ Returns true if it is and false otherwise.
 util.isFunction(value) 
 ```
 
-## isNumber
+### isNumber
 Checks if the value is a number. <br/>
 Throws Error if value is empty <br/>
 Returns true if it is and false otherwise.
@@ -83,7 +94,7 @@ Returns true if it is and false otherwise.
 util.isNumber(value) 
 ```
 
-## isBoolean
+### isBoolean
 Checks if the value is boolean. <br/>
 Throws Error if value is empty <br/>
 Returns true if it is and false otherwise.
@@ -91,7 +102,7 @@ Returns true if it is and false otherwise.
 util.isBoolean(value) 
 ```
 
-## escapeString
+### escapeString
 Sanitizes a string, escaping special characters, double and single quotation marks and removing white spaces at the start and end of the string. <br/>
 Throws an Error if the value is not a string. <br/>
 Returns escaped string.
@@ -99,7 +110,7 @@ Returns escaped string.
 util.isObject(value) 
 ```
 
-## pushUnique
+### pushUnique
 This is a Array.prototype function meaning it's only accessable through a instantiated array.  <br/>
 This function checks if the value exists on the array and if it doesn't it'll push it in. <br/>
 Returns false if the value is in the array and true otherwise.
@@ -109,7 +120,7 @@ arr.pushUnique(2); // does nothing
 arr.pushUnique(4); // adds 4 to the array
 ```
 
-## removeIfExists
+### removeIfExists
 Also a prototype function. This one checks if an element exists in the array and if so, removes it. <br/>
 Returns nothing.
 ```javascript
@@ -118,7 +129,7 @@ arr.removeIfExists(2); // removes 2
 arr.removeIfExists(4); // does nothing
 ```
 
-## formatDate 
+### formatDate 
 Can be used either on an instantiated object or not. <br/>
 Formats a date to either EU, US or MySQL-ready. Can return date and time or date only. The seperator can be specified to either "/" or "-" <br/>
 Returns the formated date <br/>
@@ -137,6 +148,11 @@ withTime = ``true`` or ``false``, defaulting to ``true`` <br/>
 seperator = ``/`` or ``-``, defaulting to ``/`` <br/>
 
 # ChangeLog
+
+### Version 1.1.3 
+- Fixed bug with DateFormat
+- Migrated to TypeScript
+- updated readme
 
 ### Version 1.1.2
 - minor bugfixes
@@ -164,4 +180,5 @@ seperator = ``/`` or ``-``, defaulting to ``/`` <br/>
 
 <br/><br/>
 
-# MIT License
+# License
+[MIT](https://couto.mit-license.org/)
