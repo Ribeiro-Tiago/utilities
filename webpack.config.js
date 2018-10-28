@@ -2,7 +2,8 @@ module.exports = {
     mode: "production",
     entry: "./src/utilities.ts",
     output: {
-        filename: "index.js"
+        filename: "index.js",
+        path: __dirname
     },
     resolve: {
         extensions: ["ts"]

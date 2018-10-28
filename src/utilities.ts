@@ -7,7 +7,19 @@
  */
 
 declare interface Window {
-    util: any
+    util: {
+        isNumber: Function,
+        isEmpty: Function,
+        isPositive: Function,
+        isEven: Function,
+        isArray: Function,
+        isObject: Function,
+        isDOM: Function,
+        isString: Function,
+        isFunction: Function,
+        isBoolean: Function,
+        escapeString: Function,
+    }
 }
 
 /* interface for Date.prototype.function */
@@ -24,6 +36,20 @@ declare interface Array<T> {
     pushUnique(value: any): boolean;
     removeIfExists(value: any): void;
 }
+
+declare function isEmpty(value: any): boolean;
+declare function isNumber(value: any): boolean;
+declare function isEmpty(value: any): boolean;
+declare function isPositive(value: number): boolean;
+declare function isEven(value: number): boolean;
+declare function isArray(value: any): boolean;
+declare function isDOM(value: any): boolean;
+declare function isObject(value: any): boolean;
+declare function isString(value: any): boolean;
+declare function isFunction(value: any): boolean;
+declare function escapeString(value: string): string;
+declare function isBoolean(value: any): boolean;
+
 
 (function () {
     /**
