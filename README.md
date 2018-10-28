@@ -155,7 +155,7 @@ seperator = ``/`` or ``-``, defaulting to ``/`` <br/>
 
 # ChangeLog
 
-### Version 1.1.3
+### Version 1.1.4
 - Added testing 
 - Minor bugfixes to some functions
 
