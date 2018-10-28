@@ -149,6 +149,10 @@ seperator = ``/`` or ``-``, defaulting to ``/`` <br/>
 
 # ChangeLog
 
+### Version 1.1.3
+- Added testing 
+- Minor bugfixes to some functions
+
 ### Version 1.1.3 
 - Fixed bug with DateFormat
 - Migrated to TypeScript
