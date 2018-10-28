@@ -53,15 +53,15 @@ declare function isBoolean(value: any): boolean;
 
 (function () {
     /**
-     * Validates value to check if it's number only
+     * Validates value to check if it's number
      * @param {*} value - value to validate
-     * @return {boolean} - true if it's number only, false if not
+     * @return {boolean} - true if it's number, false if not
      */
     const isNumber = (value: any): boolean => {
         if (isEmpty(value))
             throw new Error("Expected param 1 of isNumber to be something, null was received");
 
-        return (new RegExp(/^[0-9]+$/).test(value));
+        return !(isNaN(value));
     };
 
     /**
@@ -105,9 +105,6 @@ declare function isBoolean(value: any): boolean;
      * @return {boolean} true if it's array, false if not
      */
     const isArray = (value: any): boolean => {
-        if (isEmpty(value))
-            throw new Error("Expected param 1 of isArray to be something, null was received");
-
         return Object.prototype.toString.call(value) === '[object Array]';
     };
 
@@ -130,9 +127,6 @@ declare function isBoolean(value: any): boolean;
      * @return {boolean} true if it's object, false if not
      */
     const isObject = (value: any): boolean => {
-        if (isEmpty(value))
-            throw new Error("Expected param 1 of isObject to be something, null was received");
-
         return Object.prototype.toString.call(value) === '[object Object]';
     };
 
@@ -280,9 +274,7 @@ declare function isBoolean(value: any): boolean;
 
     // add support for Node, React, Browser and AMD
     // node js 
-    // @ts-ignore
     if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-        // @ts-ignore
         module.exports = utilities;
     }
 
