@@ -1,7 +1,8 @@
 node_modules/
 src/
 tests/
-changelog.txt
 tsconfig.json
 package-lock.json
 webpack.config.js
+coverage/
+.nyc_output/
