@@ -190,5 +190,10 @@ seperator = ``/`` or ``-``, defaulting to ``/`` <br/>
 
 <br/><br/>
 
+#### footnote
+Currently when using webpack (with ts-loader) to compile and minify makes the functions aren't exported as they should. 
+As a workaround for now, I'm manually transpiling using tsc and minifying the file, until I've more time to figure our what's the problem
+
+
 # License
 [MIT](https://couto.mit-license.org/)
