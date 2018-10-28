@@ -11,5 +11,5 @@
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true
 	},
-	"exclude": ["test"]
+	"exclude": ["tests"]
 }

@@ -155,7 +155,7 @@ seperator = ``/`` or ``-``, defaulting to ``/`` <br/>
 
 # ChangeLog
 
-### Version 1.1.3
+### Version 1.1.4
 - Added testing 
 - Minor bugfixes to some functions
 
@@ -189,6 +189,11 @@ seperator = ``/`` or ``-``, defaulting to ``/`` <br/>
 - added support for react native (not tested on reactjs but should work)
 
 <br/><br/>
+
+#### footnote
+Currently when using webpack (with ts-loader) to compile and minify makes the functions aren't exported as they should. 
+As a workaround for now, I'm manually transpiling using tsc and minifying the file, until I've more time to figure our what's the problem
+
 
 # License
 [MIT](https://couto.mit-license.org/)
