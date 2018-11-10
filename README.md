@@ -155,6 +155,9 @@ seperator = ``/`` or ``-``, defaulting to ``/`` <br/>
 
 # ChangeLog
 
+### Version 1.1.5
+- fixed bug on isEmpty where it was considering data objects as empty
+
 ### Version 1.1.4
 - Added testing 
 - Minor bugfixes to some functions

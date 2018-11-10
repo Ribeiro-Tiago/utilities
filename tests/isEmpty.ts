@@ -31,4 +31,8 @@ describe('#isEmpty()', () => {
     it('should return false if the value is string "0"', () => {
         expect(util.isEmpty("0")).to.be.false;
     });
+
+    it('should return false if the value is a date object', () => {
+        expect(util.isEmpty(new Date())).to.be.false;
+    });
 });

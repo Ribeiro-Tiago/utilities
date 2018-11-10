@@ -26,7 +26,6 @@ declare interface Window {
 
 declare function isEmpty(value: any): boolean;
 declare function isNumber(value: any): boolean;
-declare function isEmpty(value: any): boolean;
 declare function isPositive(value: number): boolean;
 declare function isEven(value: number): boolean;
 declare function isArray(value: any): boolean;
@@ -59,7 +58,7 @@ declare function formatDate(date: Date | string, format: number, withTime: boole
      * @return {boolean} true if it's empty and false if not
      */
     const isEmpty = (value: any): boolean => {
-        return (value === void 0 || value === "" || String(value).toLocaleLowerCase() === "null" || value === "undefined" || (typeof value === "object" && Object.keys(value).length === 0));
+        return (value === void 0 || value === "" || String(value).toLocaleLowerCase() === "null" || value === "undefined" || ((Object.prototype.toString.call(value) === "[object Array]" || Object.prototype.toString.call(value) === "[object Object]") && Object.keys(value).length === 0));
     };
 
     /**
